@@ -102,7 +102,7 @@ class AMQPReader
         }
 
         // wait ..
-        $result = $this->io->select($this->timeout, 0);
+        $result = $this->io->select(floor($this->timeout), ($this->timeout - floor($this->timeout)) * 1000000);
 
         if ($result === false) {
             throw new AMQPRuntimeException(sprintf("An error occurs", $this->timeout));
